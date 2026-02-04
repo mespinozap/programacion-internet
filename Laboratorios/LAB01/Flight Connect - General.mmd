@@ -1,0 +1,41 @@
+classDiagram
+direction LR
+
+
+class Aeropuerto {
+  +int IdAeropuerto
+  +string CodigoAeropuerto
+  +string Nombre
+  +string Ciudad
+  +string Pais
+  +bool Activo
+}
+
+class Aerolinea {
+  +int IdAerolinea
+  +string CodigoAeropuerto
+  +string Nombre
+  +bool Activo
+}
+
+class Ruta {
+  +int IdRuta
+  +int IdAeropuertoOrigen_FK
+  +int IdAeropuertoDestino_FK
+  +string CodigoVuelo
+  +int DuracionMin
+  +bool Activo
+}
+
+class Aeronave {
+  +int IdAeronave
+  +int IdAerolinea_FK
+  +string Matricula
+  +string Modelo
+  +int Capacidad
+  +bool Activo
+}
+
+Aeropuerto "1" --> "0..*" Ruta : origen
+Aeropuerto "1" --> "0..*" Ruta : destino
+Aerolinea "1" --> "0..*" Aeronave : posee

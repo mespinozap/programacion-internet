@@ -1,0 +1,76 @@
+classDiagram
+direction LR
+
+
+class Pasajero {
+  +int IdPasajero
+  +string Nombre
+  +string Correo
+  +string Documento
+  +bool Activo
+}
+
+class Aerolinea {
+  +int IdAerolinea
+  +string CodigoAeropuerto
+  +string Nombre
+  +bool Activo
+}
+
+class Aeronave {
+  +int IdAeronave
+  +int IdAerolinea_FK
+  +string Matricula
+  +string Modelo
+  +int Capacidad
+  +bool Activo
+}
+
+class Ruta {
+  +int IdRuta
+  +int IdAeropuertoOrigen_FK
+  +int IdAeropuertoDestino_FK
+  +string CodigoVuelo
+  +int DuracionMin
+  +bool Activo
+}
+
+class Temporada {
+  +int IdTemporada
+  +string Nombre
+  +date FechaInicio
+  +date FechaFin
+  +bool Activo
+}
+
+class Salida {
+  +int IdSalida
+  +int IdRuta_FK
+  +int IdAerolinea_FK
+  +int IdAeronave_FK
+  +date FechaSalida
+  +date FechaLlegada
+  +string Estado
+  +int CupoMax
+}
+
+class Reserva {
+  +int IdReserva
+  +int IdPasajero_FK
+  +int IdSalida_FK
+  +date Fecha
+  +string Estado
+  +decimal Precio
+  +string Asiento
+}
+
+Aerolinea "1" --> "0..*" Aeronave : posee
+Aerolinea "1" --> "0..*" Salida : opera
+Aeronave "1" --> "0..*" Salida : asignada
+
+Ruta "1" --> "0..*" Salida : programada
+Temporada "1" --> "0..*" Salida : corresponde
+
+Pasajero "1" --> "0..*" Reserva : realiza
+Salida "1" --> "0..*" Reserva : recibe
+

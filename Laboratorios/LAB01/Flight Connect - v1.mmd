@@ -1,0 +1,40 @@
+classDiagram
+direction LR
+
+
+class Pasajero {
+  +int IdPasajero
+  +string Nombre
+  +string Correo
+  +string Documento
+  +bool Activo
+}
+
+class Ruta {
+  +int IdRuta
+  +int IdAeropuertoOrigen_FK
+  +int IdAeropuertoDestino_FK
+  +string CodigoVuelo
+  +int DuracionMin
+  +bool Activo
+}
+
+class Reserva {
+  +int IdReserva
+  +int IdPasajero_FK
+  +int IdRuta_FK
+  +date Fecha
+  +string Estado
+  +decimal Precio
+}
+
+class Aerolinea {
+  +int IdAerolinea
+  +string CodigoAeropuerto
+  +string Nombre
+  +bool Activo
+}
+
+Pasajero "1" --> "0..*" Reserva : realiza
+Ruta "1" --> "0..*" Reserva : recibe
+Aerolinea "1" --> "0..*" Ruta : opera
