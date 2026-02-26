@@ -11,13 +11,6 @@ class Aeropuerto {
   +bool Activo
 }
 
-class Aerolinea {
-  +int IdAerolinea
-  +string CodigoAeropuerto
-  +string Nombre
-  +bool Activo
-}
-
 class Ruta {
   +int IdRuta
   +int IdAeropuertoOrigen_FK
@@ -36,6 +29,15 @@ class Aeronave {
   +bool Activo
 }
 
-Aeropuerto "1" --> "0..*" Ruta : origen
-Aeropuerto "1" --> "0..*" Ruta : destino
-Aerolinea "1" --> "0..*" Aeronave : posee
+class Salida {
+  +int IdSalida
+  +int IdRuta_FK
+  +int IdAeronave_FK
+  +date FechaSalida
+  +date FechaLlegada
+  +string Estado
+}
+
+Aeropuerto "1" --> "0..*" Ruta : origen/destino
+Ruta "1" --> "0..*" Ruta : programada
+Aeronave "1" --> "0..*" Salida : asignada

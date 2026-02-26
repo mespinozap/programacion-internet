@@ -1,0 +1,31 @@
+classDiagram
+direction LR
+
+class Destino {
+  +int IdDestino
+  +string Nombre
+  +string Pais
+  +string Ciudad
+  +string Descripcion
+  +bool Activo
+}
+
+class Oferta {
+  +int IdOferta
+  +int IdDestino_FK
+  +decimal Precio
+  +date FechaInicio
+  +date FechaFin
+  +string Estado
+}
+
+class Reserva {
+  +int IdReserva
+  +int IdPasajero_FK
+  +int IdSalida_FK
+  +decimal Precio
+  +string Estado
+}
+
+Destino "1" --> "0..*" Oferta : promociona
+Oferta "1" --> "0..*" Reserva : aplica

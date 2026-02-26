@@ -1,0 +1,32 @@
+classDiagram
+direction LR
+
+
+class Pasajero {
+  +int IdPasajero
+  +string Nombre
+  +string Correo
+  +string Documento
+  +bool Activo
+}
+
+class Reserva {
+  +int IdReserva
+  +int IdPasajero_FK
+  +int IdRuta_FK
+  +date Fecha
+  +string Estado
+  +decimal Precio
+}
+
+class Salida {
+  +int IdSalida
+  +int IdRuta_FK
+  +int IdAeronave_FK
+  +date FechaSalida
+  +date FechaLlegada
+  +string Estado
+}
+
+Pasajero "1" --> "0..*" Reserva : realiza
+Salida "1" --> "0..*" Reserva : recibe
