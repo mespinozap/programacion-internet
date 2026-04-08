@@ -7,65 +7,93 @@
   <link rel="stylesheet" href="estilos.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-  <header class="bg-light text-center p-4">
-    <h1>Reservas de Vuelos</h1>
-    <p>Realiza tu reserva de vuelo de forma rápida y sencilla.</p>
-  </header>
 
-  <nav class="nav-menu">
-      <ul class="nav-list">
-        <li class="menu-item"><a href="index.html">Inicio</a></li>
+<div class="container">
+    <div class="header text-center">
+      <div class="header-title">Reservas de vuelos </div>
+      <div class="header-subtitle">Realiza tu reserva de vuelo de forma rápida y sencilla.</div>
+      </div>
+
+  <div class="card">
+      <nav class="nav-menu">
+        <ul class="nav-list">
+          <li class="menu-item"><a href="index.html">Inicio</a></li>
         <li class="menu-item"><a href="rutas.html">Rutas</a></li>
         <li class="menu-item"><a href="destinos.html">Destinos</a></li>
         <li class="menu-item"><a href="quienesSomos.html">¿Quiénes somos?</a></li>
       </ul>
-    </nav>
+      </nav>
+    </div>
 
-  <main class="container my-4">
-    <section class="card p-4 mx-auto" style="max-width: 600px;">
-      <form>
-        <fieldset>
-          <legend>Formulario de Reserva</legend>
+  <!-- Formulario -->
+    <div class="card form-card text-center">
+      <h1 id="tituloForm">Formulario de Reserva</h1>
+      <div class="controls">
+        <input type="hidden" id="txtId" />
+        <div class="field text-center">
+          <label for="pasajero">Nombre del Pasajero</label>
+          <input type="text" id="pasajero" required />
+        </div>
+        <div class="field text-center">
+          <label for="correo">Correo Electrónico</label>
+          <input type="email" id="correo" required />
+        </div>
+        <div class="field text-center">
+          <label for="ruta">Ruta</label>
+          <input type="text" id="ruta" required />
+        </div>
+        <div class="field text-center">
+          <label for="fecha">Fecha de Salida</label>
+          <input type="date" id="fecha" required />
+        </div>
+        <div class="field text-center">
+          <label for="fecha">Fecha de Llegada</label>
+          <input type="date" id="fecha" required />
+        </div>
+        <div class="field text-center">
+          <label for="asiento">Asiento</label>
+          <input type="text" id="asiento" />
+        </div>
+        <div class="field buttons text-center">
+          <button id="btnAdd" class="btn btn-primary" type="button">Confirmar Reserva</button>
+          <button id="btnCancel" class="btn btn-secondary" type="button">Cancelar</button>
+        </div>
+      </div>
+    </div>
 
-          <div class="mb-3">
-            <label for="pasajero" class="form-label">Nombre del Pasajero</label>
-            <input type="text" class="form-control" id="pasajero" required>
-          </div>
+    <!-- Botones de control -->
+    <div class="card">
+      <div class="field text-center">
+      <button id="btnLoad" class="btn btn-primary" type="button">Consultar</button>
+      <button id="btnClear" class="btn btn-secondary" type="button">Limpiar</button>
+    </div>
+    </div>
 
-          <div class="mb-3">
-            <label for="correo" class="form-label">Correo Electrónico</label>
-            <input type="email" class="form-control" id="correo" required>
-          </div>
+    <!-- Tabla -->
+    <div class="card">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Pasajero</th>
+              <th>Correo</th>
+              <th>Ruta</th>
+              <th>Fecha de Llegada</th>
+              <th>Fecha de Salida</th>
+              <th>Asiento</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tbodyReservas"></tbody>
+        </table>
+      </div>
+    </div>
 
-          <div class="mb-3">
-            <label for="ruta" class="form-label">Ruta</label>
-            <select class="form-select" id="ruta">
-              <option>San José → Madrid</option>
-              <option>San José → Miami</option>
-              <option>San José → Panamá</option>
-            </select>
-          </div>
-
-          <div class="mb-3">
-            <label for="fecha" class="form-label">Fecha de Salida</label>
-            <input type="date" class="form-control" id="fecha" required>
-          </div>
-
-          <div class="mb-3">
-            <label for="asiento" class="form-label">Asiento</label>
-            <input type="text" class="form-control" id="asiento" placeholder="Ej: 12A">
-          </div>
-
-          <button type="submit" class="btn btn-primary w-100">Confirmar Reserva</button>
-        </fieldset>
-      </form>
-    </section>
-  </main>
-
-  <footer class="text-center p-3 bg-light">
+    <div class="footer">
       <p>&copy; 2026 Sistema de Vuelos</p>
       <p class ="text-link "><a href="quienesSomos.html">By Minor Espinoza</a></p>
-    </footer>
+    </div>
+  </div>
+  <script type="module" src="reserva.js"></script>
 </body>
 </html>

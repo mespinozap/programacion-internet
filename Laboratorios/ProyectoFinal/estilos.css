@@ -1,29 +1,52 @@
-/* General */
+:root {
+  --bg: #10799f;        
+  --accent: #FF8C42;    
+  --accent2: #FFA552;   
+  --card: #ffffff;      
+  --muted: #64748b;    
+  --border: #e5e7eb;    
+}
+
 body {
-  background-color: rgb(255, 255, 255);
-  font-family: "Arial", sans-serif;
-  color: #333;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom, #0B2D39, #1E3A5F, #FF8C42);
+  color: #0f172a;
 }
 
-/* Header & Footer */
-header {
-  text-align: center;
-  padding: 20px;
-  background: linear-gradient(to bottom, #eba625, #ffffff);
-  color: #000000;
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 16px;
 }
 
-footer {
-  text-align: center;
-  padding: 20px;
-  text-decoration: none;
-  background-color: #2563eb;
+/* Header */
+.header {
+  border-radius: 16px;
+  padding: 18px;
+  background: var(--bg);
+  color: #fff;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, .16);
+  border: 2px solid var(--accent);
+}
+
+.header-title {
+  font-size: 22px;
+  font-weight: 800;
+  margin: 6px 0 0;
+  color: var(--accent);
+}
+
+.header-subtitle {
+  font-size: 14px;
+  opacity: .92;
+  margin: 6px 0 0;
 }
 
 /* Navbar */
-
 .nav-menu {
-  background-color: #0000ff;
+  background: var(--accent);
+  border-bottom: 2px solid var(--accent);
 }
 
 .nav-list {
@@ -35,83 +58,126 @@ footer {
 }
 
 .menu-item {
-  margin: 0;
-  background-color: #0000ff;
-  color: white;
-  padding: 20px 40px;
-  border-radius: 0px;
+  margin: 0 6px;
+  background-color: var(--accent);
+  color: #05323A;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 700;
 }
 
 .menu-item a {
-  color: white;
+  color: #05323A;
   text-decoration: none;
-  display: block;
 }
 
 .menu-item:hover {
-  background-color: #ffffff;
+  background-color: var(--accent2);
+  color: #fff;
 }
 
-.menu-item:hover a {
-  background-color: #ffffff;
-  color: black;
+/* Cards */
+.card {
+  margin-top: 14px;
+  border-radius: 14px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 18px rgba(2, 6, 23, .06);
+  padding: 14px;
 }
 
-/* Formularios */
-.form-group label,
-.form-label {
-  display: block;
-  margin-top: 10px;
-  font-weight: bold;
+/* formulario */
+.form-card {
+  max-width: 500px auto;
+  margin: 20px auto;  
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
-.form-control {
-  border-radius: 4px;
-  border: 1px solid #ccc;
+/* Botones */
+.btn {
+  padding: 10px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 800;
+  font-size: 14px;
+  transition: transform .04s ease;
 }
 
 .btn-primary {
-  border-radius: 15px;
-  transition: background-color 0.3s ease;
+  background: var(--accent);
+  color: #05323A;
 }
 
 .btn-primary:hover {
-  background-color: #1e4bb8;
+  background: var(--accent2);
+  color: #fff;
 }
 
 /* Tablas */
-.table th {
-  background-color: #2563eb;
-  color: white;
+.table-wrap {
+  overflow: auto;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  margin-top: 12px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  min-width: 760px;
+}
+
+thead th {
+  background: var(--bg);
+  color: #fff;
+  text-align: left;
+  padding: 10px;
+}
+
+tbody td {
+  padding: 10px;
+  border-top: 1px solid var(--border);
+}
+
+tbody tr:nth-child(even) {
+  background: #f8fafc;
+}
+
+/* Footer */
+.footer {
+  margin-top: 14px;
   text-align: center;
+  font-size: 12px;
+  color: var(--muted);
 }
 
-.table td,
-.table th {
-  text-align: center;
+.card.text-center {
+  padding: 30px;          
+  margin: 40px 0;        
 }
 
-/* Animaciones */
-#title:hover {
-  color: blue;
+.card.text-center h2 {
+  margin-bottom: 10px;   
 }
 
-@keyframes bounce {
-  0%,
-  20%,
-  50%,
-  80%,
-  100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-20px);
-  }
-  60% {
-    transform: translateY(-10px);
-  }
+.card.text-center h3 {
+  margin-bottom: 50px;
 }
 
-p {
-  color: black;
+.card.text-center h5 {
+  margin-bottom: 50px;
+  font-weight: normal;    
 }
+
+.card.text-center p {
+  margin-bottom: 15px;   
+}
+
+.card.text-center .text-link {
+  margin-top: 20px;       
+}
+
