@@ -74,8 +74,8 @@ const guardarReserva = async () => {
     !reserva.pasajero ||
     !reserva.correo ||
     !reserva.ruta ||
-    !reserva.fechaSalida ||
-    !reserva.fechaLlegada
+    !reserva.fecha_salida ||
+    !reserva.fecha_llegada
   ) {
     alert("Por favor, complete todos los campos obligatorios");
     return;
@@ -112,10 +112,16 @@ const eliminarReserva = async (id) => {
 
   if (error) {
     console.error(error);
-    alert("Error al eliminar");
+    alert("Error al eliminar: " + error.message);
   } else {
+    alert("Reserva eliminada correctamente");
     consultarReservas();
   }
+};
+
+// Limpiar tabla
+const limpiarTabla = () => {
+  tbody.innerHTML = "";
 };
 
 // Limpiar formulario
@@ -132,10 +138,9 @@ const limpiarFormulario = () => {
 };
 
 // Eventos
-window.onload = () => consultarReservas();
+window.onload = () => limpiarTabla();
 btnLoad.addEventListener("click", async () => consultarReservas());
 btnAdd.addEventListener("click", async () => guardarReserva());
-btnClear.addEventListener("click", async () => consultarReservas());
 btnCancel.addEventListener("click", async () => limpiarFormulario());
 
 tbody.addEventListener("click", async (event) => {
@@ -150,7 +155,7 @@ tbody.addEventListener("click", async (event) => {
     const id = target.getAttribute("data-id");
     const { data, error } = await supabase
       .from("reservas")
-      .select("id,pasajero,correo,ruta,fecha,asiento")
+      .select("id,pasajero,correo,ruta,fecha_salida,fecha_llegada,asiento")
       .eq("id", id)
       .single();
 
@@ -164,8 +169,8 @@ tbody.addEventListener("click", async (event) => {
     pasajero.value = data.pasajero;
     correo.value = data.correo;
     ruta.value = data.ruta;
-    fecha_llegada.value = data.fecha_llegada;
     fecha_salida.value = data.fecha_salida;
+    fecha_llegada.value = data.fecha_llegada;
     asiento.value = data.asiento;
 
     btnAdd.textContent = "Actualizar";

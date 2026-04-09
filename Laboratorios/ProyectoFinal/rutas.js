@@ -17,9 +17,7 @@ const tbodyRutas = document.getElementById("tbodyRutas");
 const consultarRutas = async () => {
   const { data, error } = await supabase
     .from("rutas")
-    .select(
-      "id,codigo,origen,destino,duracion,fecha_salida,fecha_llegada,aeronave",
-    );
+    .select("id,codigo,origen,destino,duracion,fecha_salida,fecha_llegada,aeronave");
 
   if (error) {
     console.error(error);
