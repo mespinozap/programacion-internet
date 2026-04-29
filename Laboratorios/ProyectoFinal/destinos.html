@@ -3,53 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aerolíneas y Aeronaves</title>
+  <title>Nuestros Destinos</title>
   <link rel="stylesheet" href="estilos.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+<body>
 <div class="container">
-    <div class="header text-center">
-      <div class="header-title">Nuestros Destinos</div>
-      <div class="header-subtitle">Descubre los mejores destinos para tu próximo viaje.</p>
-      </div>
+    <div class="header text-center my-4">
+      <h1>Nuestros Destinos</h1>
+      <p>Descubre los mejores destinos para tu próximo viaje.</p>
+    </div>
   
-  <div class="card">
-      <nav class="nav-menu">
-        <ul class="nav-list">
-        <li class="menu-item"><a href="index.html">Inicio</a></li>
-        <li class="menu-item"><a href="rutas.html">Rutas</a></li>
-        <li class="menu-item"><a href="reservas.html">Reservas</a></li>
-        <li class="menu-item"><a href="quienesSomos.html">¿Quiénes somos?</a></li>
-      </ul>
+    <div class="card mb-4">
+      <nav class="nav-menu p-3">
+        <ul class="nav-list list-inline">
+          <li class="menu-item list-inline-item"><a href="index.html">Inicio</a></li>
+          <li class="menu-item list-inline-item"><a href="rutas.html">Rutas</a></li>
+          <li class="menu-item list-inline-item"><a href="reservas.html">Reservas</a></li>
+          <li class="menu-item list-inline-item"><a href="quienesSomos.html">¿Quiénes somos?</a></li>
+          <li class="menu-item list-inline-item"><button id="btnLogout" class="btn btn-sm btn-logout">Cerrar Sesión</button></li>
+        </ul>
       </nav>
     </div>
 
-    <!-- Botón de consulta -->
-    <div class="card ">
-      <button id="btnLoadDestinos" class="btn btn-primary" type="button">Consultar Destinos</button>
-    </div>
-
-  <div class="card text-center">
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>País</th>
-              <th>Costo</th>
-              <th>Fecha</th>
-            </tr>
-          </thead>
-          <tbody id="tbodyDestinos"></tbody>
-        </table>
-      </div>
-    </div>
-
-  <div class="footer">
+    <div class="row" id="destinosCards"></div>
+    
+    <div class="footer text-center mt-4">
       <p>&copy; 2026 Sistema de Vuelos</p>
-      <p class ="text-link "><a href="quienesSomos.html">By Minor Espinoza</a></p>
+      <p class="text-link"><a href="quienesSomos.html">By Minor Espinoza</a></p>
     </div>
-  </div>
-  <script type="module" src="destinos.js"></script>
+</div>
+<script type="module" src="destinos.js"></script>
+<script type="module" src="sesion.js"></script>
 </body>
 </html>

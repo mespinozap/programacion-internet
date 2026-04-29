@@ -1,12 +1,8 @@
-// importamos el cliente de Supabase para interactuar con la base de datos
-// este cliente ya está configurado con la URL y la clave de acceso a nuestra instancia de Supabase
 import { supabase } from "./supabase.js";
 
 //****************************************
 // Referencias a elementos del DOM
 //****************************************
-// Botones
-const btnClear = document.getElementById("btnClear");
 const btnAdd = document.getElementById("btnAdd");
 const btnCancel = document.getElementById("btnCancel");
 const btnLoad = document.getElementById("btnLoad");
@@ -25,14 +21,30 @@ const asiento = document.getElementById("asiento");
 const tbody = document.getElementById("tbodyReservas");
 
 //****************************************
-//Eventos
+// Funciones
 //****************************************
+
+// Verificar sesión
+const verificarSesion = async () => {
+  const { data, error } = await supabase.auth.getSession();
+  if (error) {
+    console.error(error);
+    alert("Error verificando sesión");
+    return;
+  }
+  if (!data.session) {
+    alert("Debe iniciar sesión para hacer reservas");
+    window.location.href = "login.html";
+  } else {
+    console.log("Usuario autenticado:", data.session.user.email);
+  }
+};
 
 // Consultar reservas
 const consultarReservas = async () => {
   const { data, error } = await supabase
     .from("reservas")
-    .select("id,pasajero,correo,ruta,fecha_salida, fecha_llegada,asiento");
+    .select("id,pasajero,correo,ruta,fecha_salida,fecha_llegada,asiento");
 
   if (error) {
     console.error(error);
@@ -47,8 +59,8 @@ const consultarReservas = async () => {
       <td>${r.pasajero}</td>
       <td>${r.correo}</td>
       <td>${r.ruta}</td>
-      <td>${r.fecha_llegada}</td>
       <td>${r.fecha_salida}</td>
+      <td>${r.fecha_llegada}</td>
       <td>${r.asiento ?? ""}</td>
       <td>
         <button class="btnEditar" data-id="${r.id}">Editar</button>
@@ -70,22 +82,13 @@ const guardarReserva = async () => {
     asiento: asiento.value.trim(),
   };
 
-  if (
-    !reserva.pasajero ||
-    !reserva.correo ||
-    !reserva.ruta ||
-    !reserva.fecha_salida ||
-    !reserva.fecha_llegada
-  ) {
+  if (!reserva.pasajero || !reserva.correo || !reserva.ruta || !reserva.fecha_salida || !reserva.fecha_llegada) {
     alert("Por favor, complete todos los campos obligatorios");
     return;
   }
 
   if (txtId.value) {
-    const { error } = await supabase
-      .from("reservas")
-      .update([reserva])
-      .eq("id", txtId.value);
+    const { error } = await supabase.from("reservas").update([reserva]).eq("id", txtId.value);
     if (error) {
       console.error(error);
       alert("Error actualizando reserva");
@@ -109,7 +112,6 @@ const guardarReserva = async () => {
 const eliminarReserva = async (id) => {
   if (!confirm("¿Está seguro de eliminar esta reserva?")) return;
   const { error } = await supabase.from("reservas").delete().eq("id", id);
-
   if (error) {
     console.error(error);
     alert("Error al eliminar: " + error.message);
@@ -117,11 +119,6 @@ const eliminarReserva = async (id) => {
     alert("Reserva eliminada correctamente");
     consultarReservas();
   }
-};
-
-// Limpiar tabla
-const limpiarTabla = () => {
-  tbody.innerHTML = "";
 };
 
 // Limpiar formulario
@@ -137,11 +134,12 @@ const limpiarFormulario = () => {
   tituloForm.textContent = "Formulario de Reserva";
 };
 
+//****************************************
 // Eventos
-window.onload = () => limpiarTabla();
-btnLoad.addEventListener("click", async () => consultarReservas());
-btnAdd.addEventListener("click", async () => guardarReserva());
-btnCancel.addEventListener("click", async () => limpiarFormulario());
+//****************************************
+btnLoad.addEventListener("click", consultarReservas);
+btnAdd.addEventListener("click", guardarReserva);
+btnCancel.addEventListener("click", limpiarFormulario);
 
 tbody.addEventListener("click", async (event) => {
   const target = event.target;
@@ -177,3 +175,11 @@ tbody.addEventListener("click", async (event) => {
     tituloForm.textContent = "Editar Reserva";
   }
 });
+
+//****************************************
+// Inicialización
+//****************************************
+window.onload = async () => {
+  await verificarSesion();
+  
+};
